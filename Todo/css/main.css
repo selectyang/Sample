@@ -161,7 +161,7 @@ ul, ol, li {
     /*position: relative;*/ }
     #main .newTask .site {
       position: relative;
-      top: 37px;
+      top: 40px;
       left: 6px;
       font-size: 18px;
       color: green; }
