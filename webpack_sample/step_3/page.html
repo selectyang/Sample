@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/dome.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="newTask">
+        <input type="text" class="form-content" v-model="newTodo" @keypress.enter="addTodo" placeholder="请输入代办事项">
+      </div>
+      <ol class="todos">
+        <li v-for="todo in todoList">
+          <input type="checkbox" v-model="todo.done">
+          <span class="todo-content">{{ todo.title }}</span>
+          <span class="done" v-if="todo.done">已完成</span>
+          <span class="done" v-else>未完成</span>
+          <span class="done">创建时间</span>
+          <span class="creat-time">{{ todo.createdAT }}</span>
+
+          <button class="remove-button" @click="removeTodo(todo)">X</button>  <!--添加一个按钮-->
+        </li>
+      </ol>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>

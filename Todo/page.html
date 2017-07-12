@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo</title>
+    <link rel="stylesheet" href="./css/dome.css">
+    <link rel="stylesheet" href="./IconFont-Todo/iconfont.css">
+  </head>
+  <body>
+    <div id="app">
+      <section id="signInAndSignUp" v-if="!currentUser">
+        <div class="signUp" v-if="actionType=='signUp'">
+          <form @submit.prevent=signUp>
+            <div class="formRow">
+              <input type="text" v-model="formData.username" placeholder="请输入邮箱">
+            </div>
+            <div class="formRow">
+              <input type="password" v-model="formData.password" placeholder="请输入密码 (6~16位)">
+            </div>
+            <div class="formRow">
+              <input type="password" v-model="formData.password_verif" placeholder="请再次输入密码">
+            </div>
+            <div class="formActions">
+              <input type="submit" value="注册" class="signUp-button">
+            </div>
+          </form>
+        </div>
+        <div class="login" v-if="actionType=='login'">
+          <form @submit.prevent=login>
+            <div class="formRow">
+              <input type="text" v-model="formData.username" placeholder="请输入用户名">
+            </div>
+            <div class="formRow">
+              <input type="password" v-model="formData.password" placeholder="请输入密码">
+            </div>
+            <div class="formActions">
+              <input type="submit" value="登入" class="login-button">
+            </div>
+          </form>
+        </div>
+        <div class="land-nav">
+          <label :class="{active:actionType ==='signUp'}"><input type="radio" name="type" v-model="actionType" value="signUp">木有账号？马上注册一个</label>
+          <label :class="{active:actionType ==='login'}"><input type="radio" name="type" v-model="actionType" value="login">以有账号？</label>
+        </div>
+      </section>
+      <section id="todo" v-if="currentUser">
+        <div id="side">
+          <form @submit.prevent=logOut>
+              <div class="loginUser">
+                  <span class="user-icon"><i class="icon iconfont icon-tn-people"></i></span>
+                  <span class="user-name">{{currentUser.username}}</span>
+              </div>
+              <div class="logOut-button">
+                  <i class="icon iconfont icon-tuichudenglu"><button>&nbsp注销</button></i>
+              </div>
+              <ul class="todo-nav">
+                  <li @click="filterAll" class="all-list"><i class="icon iconfont icon-taiyang-copy"></i>My-ToDo</li>
+                  <li @click="filterTodo" class="todo-list"><i class="icon iconfont icon-item"></i>未完成</li>
+              </ul>
+          </form>
+        </div>
+        <div id="main">
+           <div :class="{Allback:logbackground,filterback:!logbackground}">
+               <p class="todo-title">To Do</p>
+               <p class="todo-nowtime">{{format_nowTime}}</p>
+           </div>
+          <ol class="todos">
+              <li v-for="todo in todoList"
+                  :class="{completed:todo.isFinished}">
+                  <div class="view">
+                      <div class="creat-todo">
+                        <span class="icon-check"><label @click="toggleFinish(todo)"  :class="{checked:todo.isFinished}"><input type="checkbox" v-model="todo.isFinished"></label></span>
+                        <span class="todo-content">{{todo.title}}</span>
+                          <button class="remove-button" @click="removeTodo(todo)"><i class="icon iconfont icon-lajitong-copy"></i></button>  <!--添加一个按钮-->
+                      </div>
+                      <p class="creat-time">
+                        <span class="done"><i class="icon iconfont icon-calendar"></i> 创建时间:{{ todo.createdAT }} </span>
+                      </p>
+                  </div>
+
+              </li>
+          </ol>
+          <div class="newTask">
+              <i class="icon iconfont icon-jiahao1 site"></i>
+              <input type="text" class="form-content" v-model="newTodo" @keypress.enter="addTodo" placeholder="请输入代办事项">
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+#app {
+    padding-top: 100px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.form-content {
+    height: 34px;
+    min-width: 100%;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.todos {
+    padding-left: 18px;
+}
+
+.todos span {
+    display: inline-block;
+}
+
+.todo-content {
+    width: 200px;
+}
+
+.done {
+    width: 80px;
+}
+
+.creat-time {
+    width: 170px;
+}

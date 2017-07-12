@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#app {
+    padding-top: 100px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.form-content {
+    height: 34px;
+    min-width: 100%;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+.todos {
+    padding-left: 18px;
+}
+
+.todos span {
+    display: inline-block;
+}
+
+.todo-content {
+    width: 200px;
+}
+
+.done {
+    width: 80px;
+}
+
+.creat-time {
+    width: 170px;
+}
+
+/************************************/
+.logOut-button {
+    float: right;
+    color: red;
+}
+
+#signInAndSignUp {
+    text-align: center;
+}
+
+#signInAndSignUp .land-nav {
+    padding-bottom: 24px;
+    color: #959595;
+    font-size: 24px;
+}
+
+#signInAndSignUp .land-nav  .active{
+    color: pink;
+}
+
+.land-nav label {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.land-nav input[type="radio"]{
+    display: none;
+}
+
+/*********************************/
+
+#signInAndSignUp .formRow {
+    margin: 10px;
+}
+
+#signInAndSignUp .formRow  input{
+    font-size: 16px;
+    width: 300px;
+    border-radius: 4px;
+    border: 1px solid #787878;
+    padding : 10px 0;
+}
+
+#signInAndSignUp .formActions input {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 6px;
+    border: 1px solid #787878;
+    border-radius: 4px;
+}
+
+#signInAndSignUp .formActions .signUp-button {
+    background-color: pink;
+}
+
+#signInAndSignUp .formActions .login-button {
+    background-color: green;
+}
+
+#signInAndSignUp .formActions input[type="submit"] {
+    width: 300px;
+    font-size: 20px;
+    color: #fff;
+}
