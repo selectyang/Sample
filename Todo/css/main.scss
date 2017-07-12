@@ -1,0 +1,253 @@
+* { margin: 0;  padding: 0;  box-sizing: border-box;}
+* {font-family:  "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;}
+
+ul,ol,li { list-style: none; padding: 0; margin: 0; }
+
+/**************************/
+/*布局*/
+#todo:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#main{
+  height: 100vh;
+  margin-left: 280px;
+}
+#side{
+  min-width: 270px;
+  max-width: 280px;
+  height: 100vh;
+  float: left;
+  background: #fff;
+  .loginUser{
+    margin-top: 20px;
+    margin-buttom: 20px;
+    padding: 10px;
+    font-size: 18px;
+    .user-icon{
+      padding-right: 5px;
+    }
+  }
+  .logOut-button {
+    line-height: 1.2;
+    margin-left: 200px;
+    font-size: 18px;
+    color: red;
+    cursor: pointer;
+    button{
+      cursor: pointer;
+      border: 1px solid #fff;
+      background: #fff;
+      color: red;
+      font-size: 16px;
+    }
+  }
+  .todo-nav  {
+    width: 100%;
+    list-style: none;
+    margin-top: 12px;
+    margin-buttom: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-top: 1px solid #cccccc;
+    .all-list {
+      cursor: pointer;
+      margin-bottom: 20px;
+      color: #0086b3;
+    }
+    .all-list:hover {
+      background: #ccc;
+    }
+    .todo-list {
+      cursor: pointer;
+      color: #55a532;
+    }
+    .todo-list:hover {
+      background: #ccc;
+    }
+    li i {
+      margin-right: 8px;
+    }
+  }
+}
+
+
+#main  {
+  background: #eee;
+  .filterback {
+    background: #0086b3;
+    .todo-title {
+      padding: 90px 0 0 10px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .todo-nowtime {
+      padding: 10px;
+      color: #eee;
+    }
+  }
+  .Allback {
+    background: #55a532;
+    .todo-title {
+      padding: 90px 0 0 10px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .todo-nowtime {
+      padding: 10px;
+      color: #eee;
+    }
+  }
+  .todos li {/*checkbox 效果*/
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 10px 0;
+    position: relative;
+    .view {
+      position: relative;
+      .creat-time {
+        padding-left: 43px;
+        font-size: 12px;
+      }
+      .todo-content {
+        font-size: 18px;
+        display: inline-block;
+        margin-left: 10px;
+        padding: 5px 0;
+      }
+      .icon-check {
+        position: relative;
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        margin-left: 10px;
+        label {
+          cursor: pointer;
+          position: absolute;
+          top: 12px;
+          display: inline-block;
+          height: 18px;
+          width: 18px;
+          border: 1px solid #666;
+          border-radius: 50% 50%;
+          input {
+            height: 12px;
+            width: 20px;
+            visibility: hidden;
+            margin: 0;
+            padding: 0;
+          }
+        }
+        label.checked:after {
+          content: "";
+          position: absolute;
+          top: 4px;
+          left: 3px;
+          width: 9px;
+          height: 4px;
+          background: transparent;
+          border: 2px solid green;
+          border-top: none;
+          border-right: none;
+          transform: rotate(-45deg);
+          opacity: 0.8;
+        }/*checkbox 效果*/
+      }
+      .remove-button {
+        cursor: pointer;
+        border: 1px solid #fff;
+        background: #fff;
+        color: red;
+        font-size: 18px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+    }
+  }
+  .todos .completed .todo-content {
+    color: #aaaaaa;
+    text-decoration: line-through;
+  }
+  .newTask {
+    /*position: relative;*/
+    .site {
+      position: relative;
+      top: 37px;
+      left: 6px;
+      font-size: 18px;
+      color: green;
+    }
+    .form-content {
+      height: 34px;
+      min-width: 100%;
+      padding: 5px 30px;
+      font-size: 14px;
+      color: #555;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+/************************************/
+
+#signInAndSignUp {
+  padding-top: 100px;
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  .land-nav {
+    padding-bottom: 24px;
+    margin-top: 20px;
+    color: #959595;
+    font-size: 14px;
+    label {
+      cursor: pointer;
+      padding: 10px;
+    }
+    .active{
+      display: none;
+    }
+    input[type="radio"]{
+      display: none;
+    }
+  }
+  .formRow {
+    margin: 10px;
+    input{
+      font-size: 16px;
+      width: 300px;
+      border-radius: 4px;
+      border: 1px solid #787878;
+      padding : 10px 5px;
+      font-family: sans-serif;
+    }
+  }
+  .formActions input {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 6px;
+    border: 1px solid #787878;
+    border-radius: 4px;
+  }
+  .formActions .signUp-button {
+    background-color: pink;
+  }
+  .formActions .login-button {
+    background-color: green;
+  }
+  .formActions input[type="submit"] {
+    width: 300px;
+    font-size: 20px;
+    color: #fff;
+  }
+}
+

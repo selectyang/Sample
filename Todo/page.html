@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Todo</title>
-    <link rel="stylesheet" href="./css/dome.css">
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./IconFont-Todo/iconfont.css">
   </head>
   <body>
@@ -71,7 +71,7 @@
                       <div class="creat-todo">
                         <span class="icon-check"><label @click="toggleFinish(todo)"  :class="{checked:todo.isFinished}"><input type="checkbox" v-model="todo.isFinished"></label></span>
                         <span class="todo-content">{{todo.title}}</span>
-                          <button class="remove-button" @click="removeTodo(todo)"><i class="icon iconfont icon-lajitong-copy"></i></button>  <!--添加一个按钮-->
+                        <button class="remove-button" @click="removeTodo(todo)"><i class="icon iconfont icon-lajitong-copy"></i></button>  <!--添加一个按钮-->
                       </div>
                       <p class="creat-time">
                         <span class="done"><i class="icon iconfont icon-calendar"></i> 创建时间:{{ todo.createdAT }} </span>
