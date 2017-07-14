@@ -18,7 +18,6 @@ import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
 
-
 export default {
   name: 'app',
   data: function(){
@@ -31,11 +30,11 @@ export default {
 </script>
 
 <style>
-  .page{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: #eaebec;
+  .page {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #eaebec;
   }
 
   .page>main{
