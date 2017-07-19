@@ -26,7 +26,7 @@
                 <label >{{key}}</label>
                 <input type="text" v-model="resume[item.field][key]"/>
              </div>
-          </li>
+           </li>
       </ol>
   </div>
 </template>
@@ -35,44 +35,22 @@
 <script>
 export default {
   name: 'resumeEditor',
-  data () {
-    return {
-      selected: 'profile',
-      resume: {
-        config: [
-          { field: 'profile',icon: 'visiting'},
-          { field: 'work history',icon: 'work'},
-          { field: 'education',icon: 'Book'},
-          { field: 'projects',icon: 'project'},
-          { field: 'awards',icon: 'awards'},
-          { field: 'contacts',icon: 'phone'},
-        ],
-        profile: {
-          name: '',
-          city: '',
-          title: ''
-        },
-        'work history': [
-          {company: 'AL',content: '这是我的第二份工作'},
-          {company: 'TX',contenr: '这是我的第一份工作'}
-        ],
-        education: [
-          {school: 'A',content: '文字'},
-          {school: 'B',content: '文字'},
-        ],
-        projects: [
-          {name: 'project A',content: '文字'},
-          {name: 'porject B',content: '文字'},
-        ],
-        awards: [
-          {name: 'awards A',content: '文字'},
-          {name: 'awards B',content: '文字'},
-        ],
-        contacts: [
-          {contacts: 'phone',content: '777777911'},
-          {name: 'QQ',content: '3838998'},
-        ],
+  computed: {
+    selected:{
+      get (){
+        return this.$store.state.selected
+      },
+      set (value){
+        return this.$store.commit('switchTab',value)
       }
+    },
+    resume (){
+      return this.$store.state.resume
+    }
+  },
+  methods: {
+    add (){
+      this.$store.commit('increment')
     }
   }
 }

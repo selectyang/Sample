@@ -19,6 +19,8 @@ import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
 import icons from './assets/iconfont.js'
 
+import store from './store/index'
+
 export default {
   name: 'app',
   data: function(){
@@ -26,6 +28,7 @@ export default {
       text: '你好'
     }
   },
+  store,
   components: { Topbar,ResumeEditor,ResumePreview },
   created() {
    // document.body.insertAdjacentHTML('afterBegin', icons)
