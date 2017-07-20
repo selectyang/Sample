@@ -72,7 +72,6 @@ ul,ol,li { list-style: none; padding: 0; margin: 0; }
   }
 }
 
-
 #main  {
   background: #eee;
   .filterback {
@@ -199,8 +198,23 @@ ul,ol,li { list-style: none; padding: 0; margin: 0; }
 
 /************************************/
 
+.nav-img {
+  padding-top: 30px;
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  .log-img {
+    max-width: 400px;
+    padding-bottom: 10px;
+  }
+  .log-text{
+    width: 300px;
+    margin: 0 auto;
+  }
+}
+
 #signInAndSignUp {
-  padding-top: 100px;
+  padding-top: 20px;
   width: 600px;
   margin: 0 auto;
   text-align: center;
@@ -250,4 +264,6 @@ ul,ol,li { list-style: none; padding: 0; margin: 0; }
     color: #fff;
   }
 }
-
+[v-cloak] {
+  display: none;
+}

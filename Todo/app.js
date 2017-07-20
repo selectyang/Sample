@@ -31,6 +31,7 @@ var app = new Vue({
     todoList: [],
     currentUser: null,
     format_nowTime: '',
+    viewName: '',
     logbackground: false,
     actionType: 'signUp',
     formData: {
@@ -40,7 +41,8 @@ var app = new Vue({
     },
   },
   created: function() {
-    this.currentUser = this.getCurrentUser();
+    this.currentUser = this.getCurrentUser()
+    this.viewName = this.currentUser.username.substr(0,this.currentUser.username.search('@')) || ''
     this.fetchTodos()
     this.nowTime()
   },

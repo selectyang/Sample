@@ -298,6 +298,7 @@ var app = new _vue2.default({
     todoList: [],
     currentUser: null,
     format_nowTime: '',
+    viewName: '',
     logbackground: false,
     actionType: 'signUp',
     formData: {
@@ -308,6 +309,7 @@ var app = new _vue2.default({
   },
   created: function created() {
     this.currentUser = this.getCurrentUser();
+    this.viewName = this.currentUser.username.substr(0, this.currentUser.username.search('@')) || '';
     this.fetchTodos();
     this.nowTime();
   },

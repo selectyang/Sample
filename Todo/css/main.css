@@ -177,8 +177,20 @@ ul, ol, li {
       margin-bottom: 16px; }
 
 /************************************/
+.nav-img {
+  padding-top: 30px;
+  width: 600px;
+  margin: 0 auto;
+  text-align: center; }
+  .nav-img .log-img {
+    max-width: 400px;
+    padding-bottom: 10px; }
+  .nav-img .log-text {
+    width: 300px;
+    margin: 0 auto; }
+
 #signInAndSignUp {
-  padding-top: 100px;
+  padding-top: 20px;
   width: 600px;
   margin: 0 auto;
   text-align: center; }
@@ -217,5 +229,8 @@ ul, ol, li {
     width: 300px;
     font-size: 20px;
     color: #fff; }
+
+[v-cloak] {
+  display: none; }
 
 /*# sourceMappingURL=main.css.map */
