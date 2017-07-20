@@ -298,7 +298,7 @@ var app = new _vue2.default({
     todoList: [],
     currentUser: null,
     format_nowTime: '',
-    viewName: '',
+    viewname: '',
     logbackground: false,
     actionType: 'signUp',
     formData: {
@@ -309,12 +309,16 @@ var app = new _vue2.default({
   },
   created: function created() {
     this.currentUser = this.getCurrentUser();
-    this.viewName = this.currentUser.username.substr(0, this.currentUser.username.search('@')) || '';
+    this.viewName(this.currentUser);
     this.fetchTodos();
     this.nowTime();
   },
-
   methods: {
+    viewName: function viewName(name) {
+      if (name) {
+        this.viewname = name.username.substr(0, name.username.search('@'));
+      }
+    },
     formatTime: function formatTime(time) {
       // var time = new Date()
       var strArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
@@ -332,7 +336,7 @@ var app = new _vue2.default({
       setInterval(function () {
         var nowTime = new Date();
         _this.format_nowTime = _this.formatTime(nowTime);
-      }, 60000);
+      }, 10000);
     },
     fetchTodos: function fetchTodos() {
       var _this2 = this;
@@ -421,14 +425,11 @@ var app = new _vue2.default({
         isFinished: false
       });
       this.newTodo = ''; //变成空
-      //console.log(this.todoList)
-      //this.saveTodos()
       this.saveOrUpdateTodos();
     },
     removeTodo: function removeTodo(todo) {
       var index = this.todoList.indexOf(todo); //Arran.prototype.indexOf ES 5 新API
       this.todoList.splice(index, 1);
-      //this.saveTodos()
       this.saveOrUpdateTodos();
     },
     signUp: function signUp() {
@@ -457,8 +458,7 @@ var app = new _vue2.default({
           user.setPassword(password);
           user.signUp().then(function (loginedUser) {
             _this4.currentUser = _this4.getCurrentUser();
-            _this4.loginUsername = _this4.currentUser.username;
-            //console.log('signUpcurrent',this.currentUser)
+            _this4.viewName(_this4.currentUser);
           }, function (error) {
             alert('注册失败');
           });
@@ -473,8 +473,7 @@ var app = new _vue2.default({
       _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
         _this5.currentUser = _this5.getCurrentUser();
         _this5.fetchTodos();
-        _this5.loginUsername = _this5.currentUser.username;
-        //console.log('loginCurrent',this.currentUser.username)
+        _this5.viewName(_this5.currentUser);
       }, function (error) {
         alert('登陆失败');
       });
@@ -482,8 +481,6 @@ var app = new _vue2.default({
     logOut: function logOut() {
       _leancloudStorage2.default.User.logOut();
       this.currentUser = null;
-      // this.formData.username = ''
-      // this.formData.password = ''
       this.actionType = 'signUp';
       window.location.reload();
     },
@@ -493,8 +490,6 @@ var app = new _vue2.default({
         var id = current.id,
             createdAt = current.createdAt,
             username = current.attributes.username;
-        //console.log('AV.user.current',AV.User.current())
-        //console.log('object',JSON.stringify(this.todoList))
 
         return { id: id, createdAt: createdAt, username: username };
       } else {

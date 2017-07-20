@@ -8,7 +8,6 @@
   </head>
   <body>
     <div id="app" v-cloak>
-
       <section id="signInAndSignUp" v-if="!currentUser">
         <div class="nav-img">
             <img class="log-img" src="./img/todo.png" alt=""/>
@@ -53,7 +52,7 @@
           <form @submit.prevent=logOut>
               <div class="loginUser">
                   <span class="user-icon"><i class="icon iconfont icon-tn-people"></i></span>
-                  <span class="user-name">{{viewName}}</span>
+                  <span class="user-name">{{viewname}}</span>
               </div>
               <div class="logOut-button">
                   <i class="icon iconfont icon-tuichudenglu"><button>&nbsp注销</button></i>
