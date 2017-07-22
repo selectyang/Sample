@@ -6,8 +6,8 @@
           </h1>
           <h2>{{resume.profile.title}}</h2>
           <p>
-              <samll>{{resume.profile.city}}</samll>
-              <samll>{{resume.profile.birthday}}</samll>
+              <small>{{resume.profile.city}}</small>
+              <small>{{resume.profile.birthday}}</small>
           </p>
       </section>
       <section data-name="projects" v-show="resume.projects">
@@ -68,7 +68,7 @@ export default {
     }
   },
   created() {
-    console.log(this.resume)
+    //console.log(this.resume)
   }
 }
 </script>

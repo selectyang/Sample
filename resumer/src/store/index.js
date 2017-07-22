@@ -22,7 +22,7 @@ export default new Vuex.Store({
         title: 'farmer',
         birthday: '1988-02-02'
       },
-      'workHistory': [
+      workHistory: [
         {company: 'xxx公司',content: `公司成立于1997年12月20日，总部设在深圳。专注PC xxx，主要产品xxxx。
         我的主要工作如下:
          完成既定产品需求。
@@ -56,6 +56,12 @@ export default new Vuex.Store({
      },
     switchTab(state,payload) {
        state.selected = payload
-    }
+    },
+    updateValue(state,payload){
+      if(payload.index !== undefined){
+         state.resume[payload.field][payload.index][payload.key] = payload.e
+      }else {
+        state.resume[payload.field][payload.key]= payload.e
+      }}
   }
 })
