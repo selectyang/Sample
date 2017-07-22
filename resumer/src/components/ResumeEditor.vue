@@ -24,7 +24,7 @@
               </div>
               <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                 <label >{{key}}</label>
-                <input type="text" v-model="resume[item.field][key]"/>
+                <input type="text" :value="value"/>
              </div>
            </li>
       </ol>

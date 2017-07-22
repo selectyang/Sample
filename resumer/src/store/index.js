@@ -10,24 +10,31 @@ export default new Vuex.Store({
     resume: {
       config: [
         { field: 'profile',icon: 'visiting'},
-        { field: 'work history',icon: 'work'},
+        { field: 'workHistory',icon: 'work'},
         { field: 'education',icon: 'Book'},
         { field: 'projects',icon: 'project'},
         { field: 'awards',icon: 'awards'},
         { field: 'contacts',icon: 'phone'},
       ],
       profile: {
-        name: '',
-        city: '',
-        title: ''
+        name: 'Select',
+        city: 'shenz',
+        title: 'farmer',
+        birthday: '1988-02-02'
       },
-      'work history': [
-        {company: 'AL',content: '这是我的第二份工作'},
-        {company: 'TX',contenr: '这是我的第一份工作'}
+      'workHistory': [
+        {company: 'xxx公司',content: `公司成立于1997年12月20日，总部设在深圳。专注PC xxx，主要产品xxxx。
+        我的主要工作如下:
+         完成既定产品需求。
+         修复 bug。`},
+        {company: 'yyy公司',content: `公司成立于1998年12月20日，总部设在上海。专注PC xxx，主要产品xxxx。
+        我的主要工作如下:
+         完成既定产品需求。
+         修复 bug。`}
       ],
       education: [
-        {school: 'A',content: '文字'},
-        {school: 'B',content: '文字'},
+        {school: 'XXX城市管理学院',content: '专科'},
+        {school: 'XXX高级中学'},
       ],
       projects: [
         {name: 'project A',content: '文字'},
@@ -38,8 +45,8 @@ export default new Vuex.Store({
         {name: 'awards B',content: '文字'},
       ],
       contacts: [
-        {contacts: 'phone',content: '777777911'},
-        {name: 'QQ',content: '3838998'},
+        {contact: 'phone',content: '777777911'},
+        {contact: 'QQ',content: '3838998'},
       ],
     }
   },
@@ -47,7 +54,7 @@ export default new Vuex.Store({
      increment (state) {
           state.count++
      },
-    switchTab (state,payload){
+    switchTab(state,payload) {
        state.selected = payload
     }
   }
