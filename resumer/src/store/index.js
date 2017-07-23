@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import objectPath from "object-path"
 
 Vue.use(Vuex)
 
@@ -7,6 +8,10 @@ export default new Vuex.Store({
   state: {
     count: 0,
     selected: 'profile',
+    user: {
+      id: '',
+      username: ''
+    },
     resume: {
       config: [
         { field: 'profile',icon: 'visiting'},
@@ -54,14 +59,22 @@ export default new Vuex.Store({
      increment (state) {
           state.count++
      },
+    initState(state,payload){
+       Object.assign(state,payload)
+    },
     switchTab(state,payload) {
        state.selected = payload
+       localStorage.setItem('state',JSON.stringify(state))
     },
-    updateValue(state,payload){
-      if(payload.index !== undefined){
-         state.resume[payload.field][payload.index][payload.key] = payload.e
-      }else {
-        state.resume[payload.field][payload.key]= payload.e
-      }}
+    updateValue(state,{path,value}){
+        objectPath.set(state.resume,path,value)
+        localStorage.setItem('state',JSON.stringify(state))
+      },
+    setUser(state,payload){
+        Object.assign(state.user,payload)
+    },
+    removerUser(state){
+      state.user.id = ''
+    }
   }
 })

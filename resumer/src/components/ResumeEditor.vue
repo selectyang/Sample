@@ -17,14 +17,14 @@
                 <div class="subitem" v-for="(subitem,index) in resume[item.field]">
                   <div class="resumeField" v-for="(value,key) in subitem">
                     <label >{{key}}</label>
-                    <input type="text" :value="value" @input="updateValue($event.target.value,item.field,key,index)"/>
+                    <input type="text" :value="value" @input="updateResume($event.target.value,`${item.field}.${index}.${key}`)"/>
                   </div>
                   <hr/>
                 </div>
               </div>
               <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                 <label >{{key}}</label>
-                <input type="text" :value="value" @input="updateValue($event.target.value,item.field,key)"/>
+                <input type="text" :value="value" @input="updateResume($event.target.value,`${item.field}.${key}`)"/>
              </div>
            </li>
       </ol>
@@ -52,12 +52,11 @@ export default {
     add (){
       this.$store.commit('increment')
     },
-    updateValue (e,field,key,index) {
+    updateResume (value,path) {
       this.$store.commit('updateValue', {
-        field,
-        key,
-        e,
-        index
+        path,
+        value,
+
       })
     }
   }
