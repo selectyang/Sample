@@ -1,6 +1,8 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import objectPath from "object-path"
+import AV from '../lib/leancloud'
+import getAVUser from '../lib/getAVUser'
 
 Vue.use(Vuex)
 
@@ -12,47 +14,15 @@ export default new Vuex.Store({
       id: '',
       username: ''
     },
+    resumeConfig: [
+      { field: 'profile',icon: 'visiting',keys: ['name','city','title','birthday']},
+      { field: 'workHistory',icon: 'work',type: 'array',keys: ['company','details']},
+      { field: 'education',icon: 'Book',type: 'array',keys: ['school','details']},
+      { field: 'projects',icon: 'project',type: 'array',keys: ['name','details']},
+      { field: 'awards',icon: 'awards',type: 'array',keys: ['name','details']},
+      { field: 'contacts',icon: 'phone',type: 'array',keys: ['contact','content']},
+    ],
     resume: {
-      config: [
-        { field: 'profile',icon: 'visiting'},
-        { field: 'workHistory',icon: 'work'},
-        { field: 'education',icon: 'Book'},
-        { field: 'projects',icon: 'project'},
-        { field: 'awards',icon: 'awards'},
-        { field: 'contacts',icon: 'phone'},
-      ],
-      profile: {
-        name: 'Select',
-        city: 'shenz',
-        title: 'farmer',
-        birthday: '1988-02-02'
-      },
-      workHistory: [
-        {company: 'xxx公司',content: `公司成立于1997年12月20日，总部设在深圳。专注PC xxx，主要产品xxxx。
-        我的主要工作如下:
-         完成既定产品需求。
-         修复 bug。`},
-        {company: 'yyy公司',content: `公司成立于1998年12月20日，总部设在上海。专注PC xxx，主要产品xxxx。
-        我的主要工作如下:
-         完成既定产品需求。
-         修复 bug。`}
-      ],
-      education: [
-        {school: 'XXX城市管理学院',content: '专科'},
-        {school: 'XXX高级中学'},
-      ],
-      projects: [
-        {name: 'project A',content: '文字'},
-        {name: 'porject B',content: '文字'},
-      ],
-      awards: [
-        {name: 'awards A',content: '文字'},
-        {name: 'awards B',content: '文字'},
-      ],
-      contacts: [
-        {contact: 'phone',content: '777777911'},
-        {contact: 'QQ',content: '3838998'},
-      ],
     }
   },
   mutations: {
@@ -60,6 +30,16 @@ export default new Vuex.Store({
           state.count++
      },
     initState(state,payload){
+       state.resumeConfig.map((item)=>{
+         if(item.type === 'array'){
+           Vue.set(state.resume,item.field,[])
+         }else {
+           Vue.set(state.resume,item.field,{})
+           item.keys.map((key)=> {
+             Vue.set(state.resume[item.field],key,'')//state.resume[item.field][key] = '' // 这样写 Vue 无法监听属性变化
+           })
+         }
+       })
        Object.assign(state,payload)
     },
     switchTab(state,payload) {
@@ -75,6 +55,48 @@ export default new Vuex.Store({
     },
     removerUser(state){
       state.user.id = ''
+    },
+    addResumeSubfield(state,{field}){
+      let empty = {}
+      //?
+      state.resume[field].push(empty)
+      state.resumeConfig.filter((i)=>i.field === field)[0].keys.map((key)=>{
+        Vue.set(empty,key,'')
+      })
+    },
+    removeResumeSubfield(state,{field,index}){
+      state.resume[field].splice(index,1)
+    },
+    setResumeId(state,{id}){
+      state.resume.id = id
+    }
+  },
+  actions: {
+    saveResume({state,commit},payload){
+      var Resume = AV.Object.extend('Resume')
+      if(state.resume.id){
+
+      }else {
+        var resume = new Resume()
+        resume.set('profile',state.resume.profile)
+        resume.set('workHistory',state.resume.workHistory)
+        resume.set('education',state.resume.education)
+        resume.set('projects',state.resume.projects)
+        resume.set('awards',state.resume.awards)
+        resume.set('comtacts',state.resume.contacts)
+        resume.set('owner_id',getAVUser().id)
+
+        var acl = new AV.ACL()
+        acl.setPublicReadAccess(true)
+        acl.setWriteAccess(AV.User.current(),true)
+
+        resume.setACL(acl)
+        resume.save().then(function (response){
+          commit('setResumeId',{id: response.id})
+        }).catch(function(error){
+          console.log(error)
+        })
+      }
     }
   }
 })

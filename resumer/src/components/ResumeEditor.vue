@@ -2,7 +2,7 @@
   <div id="resumeEditor">
       <nav>
           <ol>
-              <li v-for="(item,index) in resume.config"
+              <li v-for="(item,index) in resumeConfig"
                   :class="{active: item.field === selected}"
                   @click="selected = item.field">
                   <svg class="icon">
@@ -12,18 +12,21 @@
           </ol>
       </nav>
       <ol class="panels">
-          <li v-for="item in resume.config" v-show="item.field === selected">
-              <div v-if="resume[item.field] instanceof Array">
+          <li v-for="item in resumeConfig" v-show="item.field === selected">
+              <div v-if="item.type === 'array'">
+                <h2>{{$t(`resume.${item.field}._`)}}</h2>
                 <div class="subitem" v-for="(subitem,index) in resume[item.field]">
+                  <el-button type="primary" icon="delete" @click="removeResumeSubfield(item.field,index)"></el-button>
                   <div class="resumeField" v-for="(value,key) in subitem">
-                    <label >{{key}}</label>
+                    <label >{{$t(`resume.${item.field}.${key}`)}}</label>
                     <input type="text" :value="value" @input="updateResume($event.target.value,`${item.field}.${index}.${key}`)"/>
                   </div>
                   <hr/>
                 </div>
+                <el-button type="primary" icon="plus" @click="addResumeSubfield(item.field)">新增</el-button>
               </div>
               <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-                <label >{{key}}</label>
+                <label >{{$t(`resume.profile.${key}`)}}</label>
                 <input type="text" :value="value" @input="updateResume($event.target.value,`${item.field}.${key}`)"/>
              </div>
            </li>
@@ -46,6 +49,9 @@ export default {
     },
     resume (){
       return this.$store.state.resume
+    },
+    resumeConfig(){
+      return this.$store.state.resumeConfig
     }
   },
   methods: {
@@ -56,8 +62,13 @@ export default {
       this.$store.commit('updateValue', {
         path,
         value,
-
       })
+    },
+    addResumeSubfield(field){
+      this.$store.commit('addResumeSubfield',{field})
+    },
+    removeResumeSubfield(field,index){
+      this.$store.commit('removeResumeSubfield',{field,index})
     }
   }
 }

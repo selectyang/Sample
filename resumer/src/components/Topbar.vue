@@ -11,8 +11,6 @@
                   <el-button type="primary" @click.prevent="signUpDialogVisible = true">注册</el-button>
                   <el-button type="success" @click.prevent="signInDialogVisible = true">登录</el-button>
               </div>
-              <el-button type="success">保存</el-button>
-              <el-button>预览</el-button>
           </div>
       </div>
       <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">

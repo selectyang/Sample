@@ -1,4 +1,7 @@
 node_modules
+npm-debug.log
+test/unit/coverage
 .DS_Store
 .idea
+log
 
