@@ -1,14 +1,6 @@
 <template>
   <div>
-      <div class=page>
-        <header>
-          <Topbar/>
-        </header>
-        <main>
-          <ResumeEditor/>
-          <ResumePreview/>
-        </main>
-      </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,34 +8,36 @@
 import 'normalize.css/normalize.css'
 import './assets/reset.css'
 
-import Topbar from './components/Topbar'
-import ResumeEditor from './components/ResumeEditor'
-import ResumePreview from './components/ResumePreview'
 import icons from './assets/iconfont.js'
-
-import store from './store/index'
 
 import AV from './lib/leancloud'
 import getAVUser from './lib/getAVUser'
 
+//document.body.insertAdjacentHTML('afterbegin', icons)
+
 export default {
   name: 'app',
-  data: function(){
-    return {
-      text: '你好'
+
+  created() {
+    this.$store.commit('initState')//初始化resume结构
+    let user = getAVUser()
+    this.$store.commit('setUser',user)
+
+    if(user.id){
+      this.$store.dispatch('fetchResume').then(()=>{
+        this.restoreResumeFromLocalStorage()
+      })
+    }else {
+      this.restoreResumeFromLocalStorage()
     }
   },
-  store,
-  components: { Topbar,ResumeEditor,ResumePreview },
-  created() {
-   // document.body.insertAdjacentHTML('afterBegin', icons)
-    let state = localStorage.getItem('state')
-    if(state){
-      state = JSON.parse(state)
+  methods: {
+    restoreResumeFromLocalStorage(){
+      let resume = localStorage.getItem('resume')
+      if(resume){
+        this.$store.commit('setResume',JSON.parse(resume))
+      }
     }
-    this.$store.commit('initState',state)
-    //this.$store.commit('initState',{})
-    this.$store.commit('setUser',getAVUser())
   }
 }
 </script>

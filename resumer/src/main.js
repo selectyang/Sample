@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import VueI18n from 'vue-i18n'
 import i18n from './i18n/'
+import store from './store/index'
 
 var locales = i18n
 
@@ -24,6 +25,7 @@ Object.keys(locales).forEach(function (lang) {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
