@@ -23,7 +23,7 @@ npm run unit
 # run all tests
 npm test
 ```
-###?????https://selectyang.github.io/Sample/resumer_v2/dist/
+### https://selectyang.github.io/Sample/resumer_v2/dist/
 
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

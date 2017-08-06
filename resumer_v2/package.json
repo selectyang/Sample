@@ -13,9 +13,13 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "element-ui": "^1.4.1",
+    "leancloud-storage": "^3.0.4",
     "node-sass": "^4.5.3",
+    "object-path": "^0.11.4",
     "sass-loader": "^6.0.6",
     "vue": "^2.3.3",
+    "vue-i18n": "^5.0.3",
     "vue-router": "^2.6.0",
     "vuex": "^2.3.1"
   },

@@ -1,11 +1,13 @@
 <template>
-    <div id="app">
-        <div id="header">
-            <Topbar/>
-        </div>
-        <div id="main">
-            <ResumeEditor/>
-            <ResumePreview/>
+    <div>
+        <div id="app">
+            <div id="header">
+                <Topbar/>
+            </div>
+            <div id="main">
+                <ResumeEditor/>
+                <ResumePreview/>
+            </div>
         </div>
     </div>
 </template>
@@ -21,6 +23,10 @@ import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
 
+import store from './store/index'
+import AV from './lib/leancloud'
+import getAVUser from './lib/getAVUser'
+
 
 export default {
   name: 'app',
@@ -29,7 +35,17 @@ export default {
         test: 'hello'
     }
   },
-  components: {Topbar,ResumeEditor,ResumePreview}
+  store,
+  components: {Topbar,ResumeEditor,ResumePreview},
+  created(){
+    let state = localStorage.getItem('state')
+    if(state){
+      state = JSON.parse(state)
+    }
+    this.$store.commit('initState',state)
+    this.$store.commit('setUser',getAVUser())
+    //this.$store.commit('initState',state)
+  }
 }
 </script>
 
@@ -57,7 +73,7 @@ export default {
 }
 
 #header {
-    background: #ccc;
+    background: #99a9bf;
 }
 #main {
     min-width: 1024px;
@@ -69,12 +85,12 @@ export default {
 }
 
 #editor{
-    width: 35%;
+    min-width: 35%;
     background: #444;
 }
 
 #preview{
-    width: 61.66667%;
+    min-width: 61.66667%;
     flex-grow: 1;
     margin-left: 16px;
     background: #777;

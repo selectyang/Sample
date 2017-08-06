@@ -1,8 +1,8 @@
 <template>
-    <div id="editor">
+    <div v-if="editorShow" id="editor">
         <nav>
             <ol>
-                <li v-for="(item,index) in resume.config"
+                <li v-for="(item,index) in resumeConfig"
                     :class="{active: item.field === selected}"
                     @click="selected = item.field">
                     <svg  class="icon" aria-hidden="true">
@@ -11,27 +11,35 @@
                     <div class="gk_gl"></div>
                 </li>
             </ol>
-            <div class="seting">
-                <svg  class="icon" aria-hidden="true">
+            <div :class="{hover: buttonShow}"
+                 class="seting"
+                  @click="isHover">
+                <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-seting"></use>
                 </svg>
+                <ul class="child-class">
+                    <li><el-button  @click="preview" type="danger">预览</el-button></li>
+                    <li><el-button  @click="save" type="danger">保存</el-button></li>
+                </ul>
             </div>
         </nav>
         <ol class="panels">
-            <li v-for="item in resume.config" v-show="item.field === selected">
-                <h3>{{item.field}}</h3>
-                <div v-if="resume[item.field] instanceof Array">
-                    <div class="subitem" v-for="subitem in resume[item.field]">
+            <li v-for="item in resumeConfig" v-show="item.field === selected">
+                <div v-if="item.type === 'array'">
+                    <h3>{{$t(`resume.${item.field}._`)}}</h3>
+                    <div class="subitem" v-for="(subitem,i) in resume[item.field]">
+                        <el-button class="remove" @click="removeResumeSubfield(item.field, i)" size="mini">删除</el-button>
                         <div class="resumeField" v-for="(value,key) in subitem">
-                            <lable>{{key}}</lable>
-                            <input type="text" :value="value"/>
+                            <label> {{$t(`resume.${item.field}.${key}`)}} </label>
+                            <input type="text" :value="value" @input="changeResumeField(`${item.field}.${i}.${key}`,$event.target.value)"/>
                         </div>
                         <hr/>
                     </div>
+                    <el-button class="add" @click="addResumeSubfield(item.field)" type="primary" size="mini">新增</el-button>
                 </div>
                 <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-                    <lable>{{key}}</lable>
-                    <input type="text" v-model="resume[item.field][key]"/>
+                    <label> {{$t(`resume.profile.${key}`)}}</label>
+                    <input type="text" :value="value" @input="changeResumeField(`${item.field}.${key}`,$event.target.value)"/>
                 </div>
             </li>
         </ol>
@@ -41,44 +49,52 @@
 <script>
     export default {
       name: 'ResumeEidtor',
-      data() {
+      data(){
         return {
-          selected: 'profile',
-          resume: {
-            config: [
-                {field: 'profile', icon: 'mingpian'},
-                {field: 'workHistory', icon: 'work'},
-                {field: 'education', icon: 'book'},
-                {field: 'projects', icon: 'projects'},
-                {field: 'awards', icon: 'cup'},
-                {field: 'contacts', icon: 'phone'}
-            ],
-            profile:{
-              name: '',
-              city: '',
-              title: ''
-            },
-            workHistory: [
-              {company: 'AL', content: '我的第二份工作是'},
-              {company: 'TX', content: '我的第一份工作是'},
-            ],
-            education: [
-              {school: 'AL', content: '文字'},
-              {school: 'TX', content: '文字'},
-            ],
-            projects: [
-              {name: 'project A', content: '文字'},
-              {name: 'project B', content: '文字'},
-            ],
-            awards: [
-              {name: 'awards A', content: '文字'},
-              {name: 'awards B', content: '文字'},
-            ],
-            contacts: [
-              {contact: 'phone', content: '13812345678'},
-              {contact: 'qq', content: '12345678'},
-            ],
+          buttonShow: false,
+
+        }
+      },
+      computed: {
+        selected:{
+          get () {
+            return this.$store.state.selected
+          },
+          set(value){
+            return this.$store.commit('switchTab',value)
           }
+        },
+        resume (){
+          return this.$store.state.resume
+        },
+        resumeConfig(){
+          return this.$store.state.resumeConfig
+        },
+        editorShow(){
+          return this.$store.state.editorShow
+        }
+      },
+      methods: {
+        changeResumeField(path,value){
+          this.$store.commit('updateResume',{
+            path,
+            value
+          })
+        },
+        addResumeSubfield(field){
+          this.$store.commit('addResumeSubfield',{field})
+        },
+        removeResumeSubfield(field,index){
+          this.$store.commit('removeResumeSubfield',{field, index})
+        },
+        isHover(){
+          this.buttonShow = !this.buttonShow
+        },
+        save(){
+          this.$store.dispatch('saveResume')
+        },
+        preview(){
+          this.$store.commit('PreviewResumerHide')
         }
       }
     }
@@ -128,7 +144,23 @@
             bottom: 10px;
             left: 50%;
             transform: translate(-50%,-50%);
+            .child-class {
+                position: absolute;
+                left: 50px;
+                top: -55px;
+                width: 60px;
+                text-align: center;
+                display: none;
+                 li {
+                    width: 50px;
+                    font-size: 14px;
+                    padding: 5px 10px;
+                }
+            }
 
+        }
+        .seting.hover .child-class {
+            display: block;
         }
     }
     .panels {
@@ -139,8 +171,14 @@
                 text-align: center;
                 margin-bottom: 20px;
             }
+            .add {
+                margin-left: 42%;
+            }
+            .remove {
+                float: right;
+            }
             .resumeField {
-                >lable {
+                > label {
                     display: block;
                 }
                 input[type=text]{
