@@ -44,7 +44,6 @@ export default {
     }
     this.$store.commit('initState',state)
     this.$store.commit('setUser',getAVUser())
-    //this.$store.commit('initState',state)
   }
 }
 </script>
