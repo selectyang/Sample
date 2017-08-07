@@ -28,7 +28,8 @@ export default {
 <style scoped lang="scss">
 .dialogwrapper {
     position: fixed;
-    background-image: url("../assets/login.jpg");
+    background-color: #ece1e1;
+    background: url("../assets/login.jpg") no-repeat center center;
     top: 0;
     left: 0;
     bottom: 0;
