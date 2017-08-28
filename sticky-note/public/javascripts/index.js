@@ -925,7 +925,7 @@ Note.prototype = {
     var color = this.colors[Math.floor(Math.random()*6)]
     var rotate = this.rotates[Math.floor(Math.random()*10)]
     this.$note.find('.note-child').css('background-color',color[1])
-    //  this.$note.find('.note-head').css('background-color',color[0])
+    //this.$note.find('.note-head').css('background-color',color[0])
     this.$note.find('.note-parent').css('transform',rotate)
   },
 

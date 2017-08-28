@@ -10,8 +10,7 @@ var session = require('express-session');
 var index = require('./routes/index');
 var all = require('./routes/all');
 var api = require('./routes/api');
-// var auth = require('./routes/auth');
-var users = require('./routes/users');
+var auth = require('./routes/oauth');
 
 var app = express();
 
@@ -26,11 +25,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'select99bc8da8',
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);//我的便签
 app.use('/all', all);//全部便签
 app.use('/api', api); //aiax 接口
-//app.use('/auth', auth);//登陆
+app.use('/auth', auth);//登陆
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,10 +5,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   var data;
   console.log('routes/index/req : ',req.session)
-  if(req.session){
+  if(req.session.user){
     data = {
       isLogin: true,
-      // user: req.session.user
+      user: req.session.user
     }
   }else {
     data = {
