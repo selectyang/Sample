@@ -1,0 +1,15 @@
+.toast{
+  position: fixed;
+  right: 30px;
+  top: 40px;
+  //transform: translateY(-50%);
+  color: #D15A39;
+  background: #fff;
+  padding: 8px 10px;
+  border: 1px solid;
+  border-right-width: 4px;
+  border-right-color: #0e88eb;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  display: none;
+}

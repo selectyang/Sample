@@ -1,0 +1,64 @@
+html, body {
+  margin: 0;
+  height: 100%; }
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+body {
+  background: #000 url(http://ourpo1xzl.bkt.clouddn.com/17-8-16/87095815.jpg) repeat top center;
+  font: 14px/1.4 'Arial'; }
+
+a {
+  text-decoration: none;
+  color: #fff; }
+
+#header {
+  height: 30px;
+  font-size: 12px; }
+  #header a {
+    display: block;
+    font-size: 12px;
+    margin-top: 6px; }
+  #header .user-area {
+    padding-right: 16px;
+    float: right; }
+    #header .user-area li {
+      float: left;
+      margin-left: 5px; }
+      #header .user-area li span {
+        color: #fff;
+        display: block;
+        margin-top: 6px; }
+    #header .user-area img {
+      height: 18px;
+      margin-top: 5px;
+      border-radius: 50%; }
+  #header .setting {
+    float: right;
+    margin-left: 9px;
+    display: none; }
+  #header .add-note {
+    float: left;
+    margin-left: 16px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 2px 4px; }
+  #header .login {
+    float: right;
+    margin-left: 16px; }
+
+#content {
+  position: relative;
+  height: -webkit-calc(100% - 30px);
+  height: calc(100% - 30px); }
+
+@keyframes move-twink-back {
+  from {
+    background-position: 0 0; }
+  to {
+    background-position: -10000px 5000px; } }
+
+/*# sourceMappingURL=index.css.map */

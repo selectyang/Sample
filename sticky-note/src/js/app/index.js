@@ -1,6 +1,23 @@
 /**
  * Created by qiangxl on 17/8/8.
  */
-var obj = require('../module/b.js')
+require('scss/index.scss')
 
-console.log(obj)
+var NoteManager = require('../module/note-manager.js').NoteManager
+var Event = require('../module/event.js')
+var WaterFall = require('../module/waterfall.js')
+
+NoteManager.load()
+
+$('.add-note').on('click',function(){
+  NoteManager.add()
+})
+
+Event.on('waterfall',function(){
+  WaterFall.init($('#content'))
+})
+
+// var Toast= require('../module/toast.js').Toast
+//
+// Toast('Holle world my is note!')
+

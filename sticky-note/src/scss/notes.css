@@ -1,0 +1,42 @@
+.note {
+  position: absolute;
+  transition: all 0.5s; }
+  .note .note-parent {
+    margin: 20px;
+    transform: rotate(4deg); }
+    .note .note-parent .note-child {
+      position: relative;
+      color: #333;
+      width: 160px;
+      min-height: 150px;
+      margin: 20px 10px;
+      box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.6);
+      transition: all 0.5s; }
+      .note .note-parent .note-child .note-head {
+        cursor: move;
+        text-align: center; }
+        .note .note-parent .note-child .note-head img {
+          height: 30px; }
+        .note .note-parent .note-child .note-head:hover .delete {
+          color: #0f0e0d;
+          opacity: 1; }
+      .note .note-parent .note-child .note-content {
+        padding: 10px;
+        padding-top: 0;
+        outline: none; }
+      .note .note-parent .note-child .delete {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity .3s; }
+
+.draggable {
+  opacity: 0.8;
+  cursor: move;
+  transition: none; }
+
+/*# sourceMappingURL=notes.css.map */

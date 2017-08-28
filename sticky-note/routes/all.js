@@ -1,21 +1,23 @@
+/**
+ * Created by qiangxl on 17/8/20.
+ */
 var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var data;
-  console.log('routes/index/req : ',req.session)
-  if(req.session){
+  if(req.session.user){
     data = {
       isLogin: true,
-      // user: req.session.user
+      user: req.session.user
     }
-  }else {
+  }else{
     data = {
       isLogin: false
     }
   }
-  console.log('routes/index/data : ',data)
+  console.log(data)
   res.render('index', data);
 });
 
