@@ -1,0 +1,18 @@
+.list-container {
+    border: 1px solid #bbb;
+    border-radius: 5px 5px 0 0;
+    background: #eee;
+
+}
+
+.list-container > .title{
+    font-size: 24px;
+    font-weight: 900;
+    padding: 20px;
+    text-align: center;
+}
+
+.list-container > .footer{
+    background: white;
+    
+}

@@ -1,0 +1,25 @@
+.btn-container > button{
+    border: none;
+    background: #42d5ff;
+    margin: 5px 10px; 
+    padding: 6px;
+    line-height: 1.5;
+    border-radius: 3px;
+    float: right;
+    margin-right: 5px;
+    margin-top: -10px;
+}
+
+.ipt-container > span{
+    font-weight: 900;
+    margin: 0 10px 0 5px;;
+}
+
+.ipt-container > input{
+    border: 1px solid #ccc;
+    width: 90%;
+    border-radius: 3px;
+    margin: 20px 1px;
+    padding: 10px 0 5px 0;
+
+}

@@ -1,0 +1,28 @@
+.item-container{
+    background-color:white;
+    border-bottom:1px solid #eee;
+    padding:20px;
+    position:relative;
+    
+}
+
+.item-container .del-container{
+    position: absolute;
+    top: 20px;
+    right:20px;
+    cursor: pointer;
+}
+
+.item-container .chk{
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+.item-container .text{
+    padding: 3px;
+    vertical-align: bottom;
+}
+
+.item-container .delLine{
+    text-decoration: line-through;
+}
