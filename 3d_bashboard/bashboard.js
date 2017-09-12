@@ -22,20 +22,24 @@ bashboard.prototype.init = function(){
 
 bashboard.prototype.render = function(data){
   let deg,value,city;
-  let codeImg = `https://weixin.jirengu.com/images/weather/code/${data.weather[0].now.code}.png`
-  value = data.weather[0].now.temperature;
-  city = data.weather[0.].city_name
-  //计算温度对应的角度值
-  if(value <= 0){
-    deg = (value + 15) * 3
-  }else if(value > 0 && value <= 20){
-    deg = value * 4.5 + 45  
-  }else if(value > 20){
-    deg = (value -20) *3 + 135  
+  if(data.status === 'error'){
+    this.input.value = '数据异常！'
+  }else{
+    let codeImg = `https://weixin.jirengu.com/images/weather/code/${data.weather[0].now.code}.png`
+    value = data.weather[0].now.temperature;
+    city = data.weather[0.].city_name
+    //计算温度对应的角度值
+    if(value <= 0){
+      deg = (value + 15) * 3
+    }else if(value > 0 && value <= 20){
+      deg = value * 4.5 + 45  
+    }else if(value > 20){
+      deg = (value -20) *3 + 135  
+    }
+    this.pointer.style.transform="rotate("+ deg +"deg)"
+    this.weather_img.style.background = `url("${codeImg}") center center/100px no-repeat`
+    this.input.value = city + ': ' + value + '℃';
   }
-  this.pointer.style.transform="rotate("+ deg +"deg)"
-  this.weather_img.style.background = `url("${codeImg}") center center/100px no-repeat`
-  this.input.value = city + ': ' + value + '℃';
 }
 
 //ajax 请求天气数据
